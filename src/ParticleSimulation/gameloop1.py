@@ -41,7 +41,6 @@ class GameLoop(tk.Canvas):
         self.masses: np.ndarray[typing.Tuple[int], np.dtype[np.int32]] = np.empty((N_ENTRIES,), dtype=np.int32)
         self.table = ttk.Treeview(self.root)
 
-
         self.times = [time.time()]
         # initialize simulation
         self.initialize_positions()
@@ -114,7 +113,6 @@ class GameLoop(tk.Canvas):
             for j in range(i + 1, len(objIDs)):
                 if self.check_dynamic_collition(i, j):  # and not col1 in moved_already and not col2 in moved_already:
                     collisions.append([i, j])
-
 
         return collisions
 
@@ -211,7 +209,7 @@ class GameLoop(tk.Canvas):
         def calc_vec():
             norm_vec = (self.positions[objectID2] + np.array(
                 [self.diameters[objectID2] * 0.5, self.diameters[objectID2] * 0.5]) - self.positions[
-                            objectID1] - np.array(
+                objectID1] - np.array(
                 [self.diameters[objectID1] * 0.5, self.diameters[objectID1] * 0.5])).copy()
             norm_vec = norm_vec / sqrt(norm_vec[0] ** 2 + norm_vec[1] ** 2)
             tang_vec = np.array([norm_vec[1], -norm_vec[0]], dtype=np.float64)
@@ -222,12 +220,12 @@ class GameLoop(tk.Canvas):
             v2_tang = np.dot(self.speeds[objectID2], tang_vec)
 
             self.speeds[objectID1] = tang_vec * v1_tang + ((v1_norm * (
-                    self.masses[objectID1] - self.masses[objectID2]) + 2 * self.masses[objectID2] * v2_norm) / (
-                    self.masses[objectID1] + self.masses[objectID2])) * norm_vec
+                self.masses[objectID1] - self.masses[objectID2]) + 2 * self.masses[objectID2] * v2_norm) / (
+                self.masses[objectID1] + self.masses[objectID2])) * norm_vec
 
             self.speeds[objectID2] = tang_vec * v2_tang + ((v2_norm * (
-                    self.masses[objectID2] - self.masses[objectID1]) + 2 * self.masses[objectID1] * v1_norm) / (
-                    self.masses[objectID1] + self.masses[objectID2])) * norm_vec
+                self.masses[objectID2] - self.masses[objectID1]) + 2 * self.masses[objectID1] * v1_norm) / (
+                self.masses[objectID1] + self.masses[objectID2])) * norm_vec
 
         calc_vec()
         print(f"hit {objectID1}, {objectID2}")
@@ -309,7 +307,7 @@ class GameLoop(tk.Canvas):
 
         # debugging game speed
 
-        self.times.append(time.time() )
+        self.times.append(time.time())
         # move positions
         collisions = self.sort_and_sweep(self.positions, self.diameters, self.position_IDs)
         for col in collisions:

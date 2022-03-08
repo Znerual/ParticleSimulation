@@ -15,7 +15,6 @@ if __name__ == '__main__':
     if int(major) != 3:
         raise Exception("Require python 3.XX")
 
-
     top = tk.Tk()
 
     game = GameLoop(top, HEIGHT, WIDTH, N_ENTRIES)
