@@ -7,5 +7,6 @@ def test_ParticleSimulation():
 
 @for_all_positional
 def decorate_all_pos(objID, para1):
-    assert objID == para1, "Indices confused!"
+    if objID != para1:
+        raise AssertionError("Indices confused!")
 
