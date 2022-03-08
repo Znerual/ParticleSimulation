@@ -3,9 +3,6 @@ import numpy as np
 import time
 import cv2
 
-from math import sqrt
-from numpy.linalg import norm
-
 from decorators import *
 from main import HEIGHT, WIDTH, N_ENTRIES
 
