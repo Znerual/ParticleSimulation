@@ -6,6 +6,7 @@ import cv2
 from decorators import *
 from main import HEIGHT, WIDTH, N_ENTRIES
 
+
 class GameLoop2(tk.Label):
     def __init__(self, fps=30):
 
@@ -33,16 +34,12 @@ class GameLoop2(tk.Label):
             cc = (int(self.colors[i, 0]), int(self.colors[i, 1]), int(self.colors[i, 2]))
             cv2.circle(self.image_np, (xx, yy), radius=5, color=cc, thickness=-1)
 
-
-
-
         # use masking
         # print((self.random_positions[:,0]))
         # r1 = np.arange(image.shape[0])
         # r2 = np.arange(image.shape[1])
         # mask1 = (self.random_positions[:,0][:, None] <= r1) & ((self.random_positions[:,0][:, None] + 10) >= r1)
         # mask2 = (self.random_positions[:,1][:, None] <= r2) & ((self.random_positions[:,1][:, None] + 10) >= r2)
-
 
         self.img = ImageTk.PhotoImage(image=Image.fromarray(self.image_np))
         self.config(image=self.img)
@@ -71,7 +68,6 @@ class GameLoop2(tk.Label):
         #    image[int(self.random_positions[i,0]) : int(self.random_positions[i,0]) +2 ,int(self.random_positions[i,1]) : int(self.random_positions[i,1]) +2,:] = self.colors[i]
         # self.image[int(self.random_positions[i, 0]) +1: int(self.random_positions[i, 0]) + 3,int(self.random_positions[i, 1]) + 1: int(self.random_positions[i, 1]) + 2, :]
 
-
         self.img = ImageTk.PhotoImage(image=Image.fromarray(self.image_np))
         self.config(image=self.img)
         self.image = self.img
@@ -79,7 +75,6 @@ class GameLoop2(tk.Label):
             self.counter += 1
 
             self.after(1000, self.gameloop)
-
 
         else:
             dif = np.diff(np.array(self.times)) / 1000000000
