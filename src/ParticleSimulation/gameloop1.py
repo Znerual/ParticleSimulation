@@ -115,7 +115,6 @@ class GameLoop(tk.Canvas):
                 if self.check_dynamic_collition(i, j):  # and not col1 in moved_already and not col2 in moved_already:
                     collisions.append([i, j])
 
-                    # moved_already.extend([col1, col2])
 
         return collisions
 
@@ -153,7 +152,6 @@ class GameLoop(tk.Canvas):
                 active_intervals.append(ind >> 1)  # bitshift right to divide by two
                 position_IDs[even_counter, selected_axis] = ind >> 1
                 even_counter += 1
-                # operation_stack.append(f"Add {ind >> 1}")
 
             # odd number = end position
             else:
@@ -161,16 +159,13 @@ class GameLoop(tk.Canvas):
                 # only current starting interval in list
                 if len(active_intervals) == 1 and active_intervals[0] == (ind - 1) >> 1:
                     active_intervals = []
-                    # operation_stack.append(f"End {(ind-1) >> 1} Clear all")
 
                 # other elements in list, therefore collision possible
                 else:
                     try:
                         possible_collisions.append(active_intervals.copy())
-                        # operation_stack.append(f"Remove {(ind-1) >> 1}")
                         active_intervals.remove((ind - 1) >> 1)
                     except ValueError as exc:
-                        # print(operation_stack)
                         print(self.positions[(ind - 1) >> 1])
                         print(self.diameters[(ind - 1) >> 1])
                         raise ValueError(exc)
@@ -190,7 +185,6 @@ class GameLoop(tk.Canvas):
 
             # small number of elements
             else:
-                # print(possible_collision)
                 for i in range(len(possible_collision)):
                     col1 = possible_collision[i]
                     for j in range(i + 1, len(possible_collision)):
