@@ -20,7 +20,7 @@ def for_all_positional(func):
     def wrapper(caller, objectIDs, *args, **kwargs):
         if len(args) == 0:
             return for_all_objects(func)
-        elif len(args) == 1:
+        if len(args) == 1:
             for objID, parameter in zip(objectIDs, *args):
                 func(caller, objID, parameter, **kwargs)
         else:
@@ -39,8 +39,6 @@ def for_all(func):
         amount_keywords = len(keywords)
         if amount_keywords == 0:
             return for_all_positional(func)
-
-        else:
-            for objID, parameter in zip(objectIDs, *args, **kwargs):  # type: ignore
-                func(caller, objID, *parameter[:-amount_keywords], **dict(zip(keywords, parameter[:amount_keywords])))
+        for objID, parameter in zip(objectIDs, *args, **kwargs):  # type: ignore
+            func(caller, objID, *parameter[:-amount_keywords], **dict(zip(keywords, parameter[:amount_keywords])))
     return wrapper
